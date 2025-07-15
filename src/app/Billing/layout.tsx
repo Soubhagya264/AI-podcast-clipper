@@ -2,7 +2,6 @@
 import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
 import { authOptions } from "@/lib/auth";
-import db from "@/lib/prisma";
 import { getServerSession } from "next-auth/next";
 
 export default async function BillingLayout({

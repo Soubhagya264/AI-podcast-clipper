@@ -1,7 +1,6 @@
 "use client";
 
 
-import { motion } from "framer-motion";
 
 import SidebarCommon from "../_components/SidebarCommon";
 import DashboardClient from "../_components/workspace/Dashboard-client";

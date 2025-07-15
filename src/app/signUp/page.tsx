@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { signupSchema, type SignupFormValues } from "@/schemas/auth";
 import { signUp } from "@/actions/auth";
-import { IconBrandGoogle } from "@tabler/icons-react";
 import GoogleButton from "@/components/Authentication/GoogleButton";
 
 export default function SignUpPage() {

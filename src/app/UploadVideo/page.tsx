@@ -2,9 +2,6 @@
 import { getUserUploadData } from "@/actions/UserUploadData";
 import SidebarCommon from "../_components/SidebarCommon";
 import UploadClient from "../_components/workspace/UploadClient";
-import { auth } from "@/lib/auth-handler";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/lib/auth";
 
 export default async function UploadVideo() {
     const { user, files } = await getUserUploadData();

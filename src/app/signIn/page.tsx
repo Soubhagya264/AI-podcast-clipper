@@ -4,7 +4,6 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { IconBrandGoogle } from "@tabler/icons-react";
 import GoogleButton from "@/components/Authentication/GoogleButton";
 
 export default function SignInPage() {
