@@ -28,7 +28,7 @@ const steps = [
 ];
 
 export function HowItWorks() {
-    const sectionRef = useRef(null);
+    const sectionRef = useRef<HTMLDivElement | null>(null);
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
     const { scrollYProgress } = useScroll({
@@ -43,7 +43,7 @@ export function HowItWorks() {
     });
 
     useEffect(() => {
-        cardsRef.current.forEach((card, i) => {
+        cardsRef.current.forEach((card) => {
             if (!card) return;
             gsap.fromTo(
                 card,
@@ -119,7 +119,9 @@ export function HowItWorks() {
                                     className="transition-transform duration-300 ease-in-out"
                                 >
                                     <motion.div
-                                        ref={(el) => (cardsRef.current[i] = el)}
+                                        ref={(el) => {
+                                            cardsRef.current[i] = el; // ✅ Correct ref assignment
+                                        }}
                                         className="relative flex flex-col items-center text-center p-8 rounded-3xl bg-white/5 border border-cyan-400/20 shadow-[0_0_60px_10px_rgba(0,255,255,0.05)] hover:shadow-[0_0_80px_20px_rgba(0,255,255,0.2)] transition-all duration-500 group"
                                     >
                                         <div className="w-full h-52 mb-6 relative rounded-2xl overflow-hidden shadow-lg">
@@ -143,9 +145,6 @@ export function HowItWorks() {
                         );
                     })}
                 </div>
-
-                {/* Floating CTA Button */}
-             
             </div>
         </section>
     );

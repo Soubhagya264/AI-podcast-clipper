@@ -38,6 +38,7 @@ export const SidebarProvider = ({
   open?: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   animate?: boolean;
+  className?: string;
 }) => {
   const [openState, setOpenState] = useState(false);
 
@@ -56,11 +57,13 @@ export const Sidebar = ({
   open,
   setOpen,
   animate,
+  className,
 }: {
   children: React.ReactNode;
   open?: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   animate?: boolean;
+  className?: string;
 }) => {
   return (
     <SidebarProvider open={open} setOpen={setOpen} animate={animate}>
@@ -157,17 +160,21 @@ export const MobileSidebar = ({
 export const SidebarLink = ({
   link,
   className,
+  onClick,   // ✅ used below
   ...props
 }: {
   link: Links;
   className?: string;
+  onClick?: () => void | Promise<void>;
 }) => {
   const { open, animate } = useSidebar();
+
   return (
     <a
       href={link.href}
+      onClick={onClick}   // ✅ Add this!
       className={cn(
-        "flex items-center justify-start gap-2  group/sidebar py-2",
+        "flex items-center justify-start gap-2 group/sidebar py-2",
         className
       )}
       {...props}

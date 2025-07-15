@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import { Play, ArrowRight, Sparkles } from "lucide-react";
 import { LightingBeam } from "./LightingBeam";
-// import { ThemeToggle } from "@/components/ThemeToggle";
+import type { Variants } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { ThemeToggle } from "./toggleTheme";
 import { useRouter } from "next/navigation";
@@ -22,7 +22,7 @@ export const Hero = () => {
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, []);
 
-    const textVariants = {
+    const textVariants: Variants = {
         hidden: { opacity: 0, y: 30 },
         visible: (i: number) => ({
             opacity: 1,
@@ -35,7 +35,7 @@ export const Hero = () => {
         }),
     };
 
-    const letterVariants = {
+    const letterVariants: Variants = {
         hidden: { opacity: 0, y: 20, rotateX: -90 },
         visible: (i: number) => ({
             opacity: 1,
@@ -48,6 +48,7 @@ export const Hero = () => {
             },
         }),
     };
+
 
     return (
         <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-950 via-purple-950/60 to-blue-950/60 dark:from-gray-950 dark:via-purple-950/60 dark:to-blue-950/60 light:from-gray-50 light:via-blue-50/40 light:to-indigo-100/40">
