@@ -15,25 +15,30 @@ export async function generateUploadUrl(fileInfo: {
   signedUrl: string;
   key: string;
   uploadedFileId: string;
-}>{
- 
+}> {
   const session = await getServerSession(authOptions);
-  
+
   if (!session) {
     console.log("NO SESSION FOUND");
     throw new Error("Unauthorized");
   }
-  
- 
+
+  const REGION = process.env.NEXT_PUBLIC_AWS_REGION;
+  const ACCESS_KEY_ID = process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID;
+  const SECRET_ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY;
+
+  if (!REGION || !ACCESS_KEY_ID || !SECRET_ACCESS_KEY) {
+    throw new Error("Missing AWS credentials in environment variables");
+  }
+
   const s3Client = new S3Client({
-    region: process.env.NEXT_PUBLIC_AWS_REGION,
+    region: REGION,
     credentials: {
-      accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
+      accessKeyId: ACCESS_KEY_ID,
+      secretAccessKey: SECRET_ACCESS_KEY,
     },
   });
-  
-  
+
   const fileExtension = fileInfo.filename.split(".").pop() ?? "";
   const uniqueId = uuidv4();
   const key = `${uniqueId}/original.${fileExtension}`;
@@ -44,7 +49,7 @@ export async function generateUploadUrl(fileInfo: {
   });
   const signedUrl = await getSignedUrl(s3Client, command, { expiresIn: 600 });
   console.log(db, "db");
-  console.log(signedUrl,"signedURL");
+  console.log(signedUrl, "signedURL");
   const uploadedFileDbRecord = await db.uploadedFile.create({
     data: {
       userId: session?.user?.id,
@@ -63,5 +68,4 @@ export async function generateUploadUrl(fileInfo: {
     key,
     uploadedFileId: uploadedFileDbRecord.id,
   };
-
 }
