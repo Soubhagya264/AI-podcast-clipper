@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/lib/prisma";
 import { inngest } from "@/inngest/client";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/lib/auth";
+import { authOptions } from "@/lib/nextAuth";
 
 export async function processVideo(uploadedFileId: string) {
   const uploadedVideo = await db.uploadedFile.findUniqueOrThrow({

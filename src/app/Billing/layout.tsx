@@ -1,7 +1,7 @@
 "use server"
 import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
-import { authOptions } from "@/lib/auth";
+import { authOptions } from "@/lib/nextAuth";
 import { getServerSession } from "next-auth/next";
 
 export default async function BillingLayout({
